@@ -19,10 +19,16 @@ interface FetchNotesResponse {
 
 export async function fetchNotes(
   page: number,
-  search: string
+  search: string,
+  tag?: string
 ): Promise<FetchNotesResponse> {
   const { data } = await noteHubAxios.get<FetchNotesResponse>("/notes", {
-    params: { perPage: 12, page, search },
+    params: {
+      perPage: 12,
+      page,
+      search,
+      ...(tag && tag !== "All" ? { tag } : {}),
+    },
   });
   return data;
 }
