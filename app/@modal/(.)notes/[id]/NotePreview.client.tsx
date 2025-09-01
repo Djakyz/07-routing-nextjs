@@ -45,7 +45,7 @@ const NotePreview = () => {
         </div>
       )}
       {isLoading && <p>Loading...</p>}
-      {isError && <p>Ops something went wrong... {error.message}</p>}
+      {isError && <p>Oops something went wrong... {error.message}</p>}
     </Modal>
   );
 };
