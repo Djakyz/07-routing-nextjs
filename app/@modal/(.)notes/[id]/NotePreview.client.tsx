@@ -14,7 +14,12 @@ const NotePreview = () => {
   };
 
   const { id } = useParams<{ id: string }>();
-  const { data: note, isLoading } = useQuery({
+  const {
+    data: note,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
     refetchOnMount: false,
@@ -33,10 +38,14 @@ const NotePreview = () => {
             <div className={css.footer}>
               <span className={css.tag}>{note.tag}</span>
             </div>
+            <button className={css.backBtn} onClick={handleClose}>
+              Back
+            </button>
           </div>
         </div>
       )}
       {isLoading && <p>Loading...</p>}
+      {isError && <p>Ops something went wrong... {error.message}</p>}
     </Modal>
   );
 };
